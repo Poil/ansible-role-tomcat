@@ -1,0 +1,19 @@
+---
+- name: harden server info, hide version
+  community.general.xml:
+    path: "{{ tomcat_directory }}/{{ instance.name }}/conf/web.xml"
+    xpath: "//web-app/servlet/servlet-name[text()='default']/.."
+    add_children:
+      - init-param:
+          - param-name: showServerInfo
+          - param-value: "false"
+
+- name: harden server info, error page
+  community.general.xml:
+    path: "{{ tomcat_directory }}/{{ instance.name }}/conf/web.xml"
+    xpath: "//web-app"
+    add_children:
+      - error-page:
+          - exception-type: java.lang.Throwable
+          - location: "/error.jsp"
+...

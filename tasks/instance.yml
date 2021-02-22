@@ -108,3 +108,8 @@
     loop_var: lib
   when:
     - instance.libs is defined
+
+- name: hardening
+  ansible.builtin.include: hardening.yml
+
+...
