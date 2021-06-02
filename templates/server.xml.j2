@@ -71,7 +71,12 @@
                address="{{ instance.address | default(tomcat_address) }}"
                protocol="HTTP/1.1"
                connectionTimeout="20000"
-               redirectPort="{{ instance.ssl_connector_port | default(tomcat_ssl_connector_port) }}" />
+               redirectPort="{{ instance.ssl_connector_port | default(tomcat_ssl_connector_port) }}"
+{% for cok, cov in instance.connector_options.items() %}
+               {{ cok }}="{{ cov }}"
+{% endfor %}
+    />
+
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"

@@ -2,7 +2,7 @@
 
 {% if instance.java_opts is defined %}
 {% for java_opt in instance.java_opts %}
-{{ java_opt.name }}="{{ java_opt.value }}"
+JAVA_OPTS="{{ java_opt.name }}={{ java_opt.value }} ${JAVA_OPTS}"
 {% endfor %}
 {% endif %}
 
